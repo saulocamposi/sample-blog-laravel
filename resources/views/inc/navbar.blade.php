@@ -10,11 +10,17 @@
             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/services">service</a>
+            <a class="nav-link" href="/services">Service</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/about">about</a>
+            <a class="nav-link" href="/about">About</a>
+          </li>          
+          <li class="nav-item">
+            <a class="nav-link" href="/posts">Blog</a>
           </li>          
         </ul>        
+        <ul class="nav navbar-nav navbar-right">
+          <li><a href="/posts/create">Create Post</a></li>
+        </ul>
       </div>
     </nav>

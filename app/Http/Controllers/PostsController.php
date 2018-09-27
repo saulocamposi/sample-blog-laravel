@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Post;
+use DB;
 
 class PostsController extends Controller
 {
@@ -13,7 +15,13 @@ class PostsController extends Controller
      */
     public function index()
     {
-        //
+        //$posts =  Post::all();         
+        //$posts = DB::select('SELECT * FROM posts');
+        //return Post::where('title', 'Post Two')->get();
+        //$posts = Post::orderBy('title','desc')->get();
+        //$posts = Post::orderBy('title','desc')->take(1)->get();
+        $posts = Post::orderBy('created_at','desc')->paginate(3);
+        return view('posts.index')->with('posts',$posts);
     }
 
     /**
@@ -23,7 +31,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        //
+        return view('posts.create');
     }
 
     /**
@@ -34,7 +42,17 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request,[
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $post = new Post;
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+
+        return redirect('/posts')->with('sucess', 'Post Created');
     }
 
     /**
@@ -44,8 +62,9 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
+    {   
+        $post = Post::find($id);
+        return view('posts.show')->with('post',$post);
     }
 
     /**
@@ -56,7 +75,8 @@ class PostsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $post = Post::find($id);
+        return view('posts.edit')->with('post',$post);
     }
 
     /**
@@ -68,7 +88,17 @@ class PostsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request,[
+            'title' => 'required',
+            'body' => 'required'
+        ]);
+
+        $post = Post::find($id);
+        $post->title = $request->input('title');
+        $post->body = $request->input('body');
+        $post->save();
+
+        return redirect('/posts')->with('sucess', 'Post Updated');
     }
 
     /**
@@ -79,6 +109,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+        return redirect('/posts')->with('sucess','Post Removed');
     }
 }
