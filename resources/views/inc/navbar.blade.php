@@ -27,9 +27,6 @@
                   <a class="nav-link" href="/posts">Blog</a>
                 </li>          
               </ul>        
-              <ul class="nav navbar-nav navbar-right">
-                  <li><a href="/posts/create">Create Post</a></li>
-                </ul>
 
               <!-- Right Side Of Navbar -->
               <ul class="navbar-nav ml-auto">
@@ -47,7 +44,7 @@
                               {{ Auth::user()->name }} <span class="caret"></span>
                           </a>
                           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="/home">Dashboard</a>
+                                <a class="dropdown-item" href="/dashboard">Dashboard</a>
                               <a class="dropdown-item" href="{{ route('logout') }}"
                                  onclick="event.preventDefault();
                                                document.getElementById('logout-form').submit();">
